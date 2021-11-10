@@ -1,6 +1,7 @@
 ﻿using Framework;
 using OpenQA.Selenium;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PageObjects
 {
@@ -32,8 +33,7 @@ namespace PageObjects
         {
             SearchField().Clear();
             SearchField().SendKeys(productName);
-            Driver.Wait(3, () => Driver.Instance.FindElement(By.CssSelector("[action-name='loader']")).GetAttribute("display") == null);
-            Driver.Wait(5, () => SuggestedCategories().Count > 1, "Suggested categories to be displayed.");
+            Driver.Wait(5, () => SuggestedCategories().First().Text.Contains(productName), $"Categories with term \"{productName}\" to be displayed.");
         }
 
         public IList<IWebElement> FetchSuggestedCategories() => SuggestedCategories();
