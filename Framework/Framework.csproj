@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CommonActions.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="FindElementNoWaitExtension.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,6 +61,10 @@
       <Project>{0e369fb0-dc82-42b9-9e5e-63dac728b9bf}</Project>
       <Name>Driver</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enums\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
