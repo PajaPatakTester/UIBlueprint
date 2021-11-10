@@ -50,6 +50,7 @@ namespace Tests
             {
                 _homePage.SearchTermInput(row[0].ToString());
                 _homePage.FetchSpecificCategories(row[1].ToString()).Should().NotBeEmpty();
+                Log.Error($"For term {row[0]}, did not find adequate category {row[1]} ");
             }
         }
 

@@ -52,12 +52,12 @@ namespace Framework
 
         public static void Wait(double maxWaitSec, Func<bool> expression, string reason = null)
         {
-            if (reason != null) Console.WriteLine($"*** Waiting max {maxWaitSec}s for: " + reason);
+            if (reason != null) Console.WriteLine($"    Waiting max {maxWaitSec}s for: " + reason);
             while (maxWaitSec > 0 && !expression())
             {
                 Thread.Sleep(TimeSpan.FromMilliseconds(300));
                 maxWaitSec -= 0.3;
-                Console.WriteLine($" Wait for it: {Math.Round(maxWaitSec, 1)}");
+                Console.WriteLine($"    - Wait for it: {Math.Round(maxWaitSec, 1)}");
             }
         }
 

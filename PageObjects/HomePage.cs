@@ -32,6 +32,7 @@ namespace PageObjects
         {
             SearchField().Clear();
             SearchField().SendKeys(productName);
+            Driver.Wait(3, () => Driver.Instance.FindElement(By.CssSelector("[action-name='loader']")).GetAttribute("display") == null);
             Driver.Wait(5, () => SuggestedCategories().Count > 1, "Suggested categories to be displayed.");
         }
 
