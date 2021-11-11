@@ -1,5 +1,5 @@
 # UIBlueprint
-Complex UI framework based on: C#, Selenium 4, SpecFlow, NUnit and PageObjects
+Complex UI framework based on: C#, Selenium 4, SpecFlow, NUnit and PageObjects.
 Aim of tests is to illustrate relatively complex assertion examples
 
 How to run this code in Visual Studio:
