@@ -31,7 +31,7 @@ namespace Tests
         [Then(@"He should see the list of suggested categories")]
         public void ThenHeShouldSeeTheListOfSuggestedCategories()
         {
-            _homePage.FetchSuggestedCategories().Should().NotBeEmpty();
+            _homePage.FetchAllSuggestedCategories().Should().NotBeEmpty();
         }
 
         [When(@"He perform search for listed companies")]
@@ -49,7 +49,7 @@ namespace Tests
             foreach (DataRow row in dataTable.Rows)
             {
                 _homePage.SearchTermInput(row[0].ToString());
-                _homePage.FetchSpecificCategories(row[1].ToString()).Should().NotBeEmpty();
+                _homePage.FetchSuggestedCategories(row[1].ToString()).Should().NotBeEmpty();
                 Log.Error($"For term {row[0]}, did not find adequate category {row[1]} ");
             }
         }

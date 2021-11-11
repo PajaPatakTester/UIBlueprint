@@ -1,5 +1,6 @@
 ﻿using Framework;
 using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,8 +12,10 @@ namespace PageObjects
 
         private readonly string url = "https://www.kupujemprodajem.com/";
 
-        public IWebElement SearchField() => Driver.Instance.FindElement(By.Id("searchKeywordsInput"));
-        public IList<IWebElement> SuggestedCategories() => Driver.Instance.FindElements(By.ClassName("kpACListItemLabel"));
+        private IWebElement SearchField() => Driver.Instance.FindElement(By.Id("searchKeywordsInput"));
+        private IList<IWebElement> SuggestedCategories() => Driver.Instance.FindElements(By.ClassName("kpACListItemLabel"));
+        private IWebElement InputExchangeAmmountField() => Driver.Instance.FindElement(By.Id("nbsAmount"));
+        private IWebElement CalculatedExchangeField() => Driver.Instance.FindElement(By.Id("nbsConverted"));
 
         public void GoTo() => Driver.Instance.Navigate().GoToUrl(url);
 
@@ -36,17 +39,24 @@ namespace PageObjects
             Driver.Wait(5, () => SuggestedCategories().First().Text.Contains(productName), $"Categories with term \"{productName}\" to be displayed.");
         }
 
-        public IList<IWebElement> FetchSuggestedCategories() => SuggestedCategories();
+        public IList<IWebElement> FetchAllSuggestedCategories() => SuggestedCategories();
 
-        public IList<IWebElement> FetchSpecificCategories(string category)
+        public IList<IWebElement> FetchSuggestedCategories(string category)
         {
             IList<IWebElement> categories = new List<IWebElement>();
-            foreach (IWebElement cat in FetchSuggestedCategories())
+            foreach (IWebElement cat in FetchAllSuggestedCategories())
             {
                 if (cat.Text.Contains(category)) categories.Add(cat);
             }
             return categories;
         }
 
+        public Decimal FetchMiddleExchangeRate()
+        {
+            InputExchangeAmmountField().Clear();
+            InputExchangeAmmountField().SendKeys(1.ToString());
+            var exchangeRate = CommonActions.FormatPrice(CalculatedExchangeField().Text);
+            return exchangeRate;
+        }
     }
 }
